@@ -4,6 +4,9 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 @Configuration
 public class RabbitMQConfig {
@@ -15,5 +18,14 @@ public class RabbitMQConfig {
     public Queue queue(){
         return new Queue(queue,true);
     }
+
+    @Bean
+    public JacksonJsonMessageConverter messageConverter(JsonMapper jsonMapper){
+
+        return new JacksonJsonMessageConverter(jsonMapper);
+    }
+
+
+
 
 }
